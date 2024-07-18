@@ -1,7 +1,10 @@
 import javax.swing.*;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.UIManager.LookAndFeelInfo;
+
 
 //contains most graphical data
 //welcome to hell
@@ -10,7 +13,12 @@ public class display extends JFrame {
     /*ppl keep saying static vars are bad and i mean thats probably true because of something something nerd stuff idk about but um im bad at coding and i keep
     having problems idk how to fix without static vars idek why theyre bad but um maybe one day ill be good at coding and it will be fixed*/
 
+    public static int frameWid = 500;
+    public static int frameHeight = 400;
+    public static int margins = 10; // i asked santa for some variables and he gave me these
+
     public static void main(String[] args) {
+
         //changes l&f to windows classic because im a basic bitch like that
         try {
             for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -24,10 +32,9 @@ public class display extends JFrame {
             System.out.println("error with look and feel");
         }
 
-
         // create a window
         JFrame frame = new JFrame("word generator");
-        frame.setSize(400, 400);
+        frame.setSize(frameWid, frameHeight);
 
         //word display
 
@@ -37,7 +44,9 @@ public class display extends JFrame {
 
         // Create a JScrollPane and add the content panel to it
         JScrollPane wordDisplay = new JScrollPane(wordPanel);
-        wordDisplay.setBounds(200, 25, 175, 375);
+        Integer displayWid = (frameWid / 2) - (margins * 2);
+        Integer displayHeight = frameHeight - (margins * 2);
+        wordDisplay.setBounds((frameWid / 2) - margins, margins, displayWid, displayHeight);
 
         // Add the scroll pane to the frame
         frame.add(wordDisplay);
@@ -51,96 +60,6 @@ public class display extends JFrame {
         frame.setResizable(false);
         songInfoComponents(panel, wordPanel);
         frame.setVisible(true);
-
-                // set the layout manager to null for absolute positioning
-                panel.setLayout(null);
-
-
-                //filter option labels
-        
-        
-                //label for word length
-                JLabel lengthLabel = new JLabel("Word Length");
-                lengthLabel.setBounds(25, 25, 150, 25);
-                panel.add(lengthLabel);
-        
-                //label for consonant
-                JLabel vowelLabel = new JLabel("Vowel Distance");
-                vowelLabel.setBounds(25, 50, 150, 25);
-                panel.add(vowelLabel);
-        
-                //label for consonant
-                JLabel startLabel = new JLabel("First Letter");
-                startLabel.setBounds(25, 75, 150, 25);
-                panel.add(startLabel);
-        
-        
-        
-                //DROPDOWNS
-        
-        
-                //array vars (dropdown options)
-        
-        
-                //for op dropdowns
-                String[] operators = {"=","<", "Any"};
-        
-                String[] letters = {"Any Letter","Any Consonant","Any Vowel", "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
-        
-        
-                //filter dropdowns
-        
-        
-                //dropdown for operator on word length
-                final JComboBox<String> lengthOperator = new JComboBox<>(operators);
-                lengthOperator.setBounds(74, 25,  50, 25);
-                panel.add(lengthOperator);
-        
-                //dropdown for operator on vowel space
-                final JComboBox<String> vowelOperator = new JComboBox<>(operators);
-                vowelOperator.setBounds(125, 50,  50, 25);
-                panel.add(vowelOperator);
-        
-                //dropdown for first letter
-                final JComboBox<String> startingLetter = new JComboBox<>(letters);
-                startingLetter.setBounds(125, 75,  50, 25);
-                panel.add(startingLetter);
-        
-        
-                //filter fields
-        
-        
-                //field for word length
-                JTextField lengthField = new JTextField("0");
-                lengthField.setBounds(134, 25, 25, 25);
-                panel.add(lengthField);
-        
-                //field for vowel
-                JTextField vowelField = new JTextField("0");
-                vowelField.setBounds(175, 50, 25, 25);
-                panel.add(vowelField);
-        
-        
-                ///BUTTONS
-        
-        
-                //button to run word calcs
-                JButton run = new JButton("Generate");
-                run.setBounds(25, 175, 100, 25);
-                panel.add(run);
-        
-        
-                //ACTIONS
-        
-                //calculates words (run button)
-                run.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        JLabel result = new JLabel(gen.generate(Integer.parseInt((String)lengthField.getText()), Integer.parseInt((String)vowelField.getText()), (String)startingLetter.getSelectedItem(), (String)lengthOperator.getSelectedItem(), (String)vowelOperator.getSelectedItem()));
-                        wordPanel.add(result);
-                        wordPanel.repaint();
-                        wordPanel.revalidate();
-                    }
-                });
     }
 
     //panel to hold components
@@ -152,26 +71,33 @@ public class display extends JFrame {
 
         //filter option labels
 
+        int queryHeight = 25;
+        int halfOne = Math.round((((frameWid / 2) - (margins * 2)) / 3 ));
+        int halfTwo = (halfOne * 2);
+        // santa please i have enough variables i do not want them for my birthday also oh geez
+
+        //System.out.println("Test 1: " + halfOne);
+        //System.out.println("Test 2: " + halfTwo);
+        //System.out.println("Test 3: " + halfThree);
+        //System.out.println("Test 4: " + frameWid);
+        //System.out.println("Test 5: " + margins); // the hoarde
 
         //label for word length
         JLabel lengthLabel = new JLabel("Word Length");
-        lengthLabel.setBounds(25, 25, 150, 25);
+        lengthLabel.setBounds(margins, margins, halfOne, queryHeight);
         panel.add(lengthLabel);
 
         //label for consonant
         JLabel vowelLabel = new JLabel("Vowel Distance");
-        vowelLabel.setBounds(25, 50, 150, 25);
+        vowelLabel.setBounds(margins, (margins + queryHeight), halfOne, queryHeight);
         panel.add(vowelLabel);
 
-        //label for consonant
+        //label for first letter
         JLabel startLabel = new JLabel("First Letter");
-        startLabel.setBounds(25, 75, 150, 25);
+        startLabel.setBounds(margins, (margins + (queryHeight*2)), halfOne, queryHeight);
         panel.add(startLabel);
 
-
-
         //DROPDOWNS
-
 
 
         //array vars (dropdown options)
@@ -180,39 +106,49 @@ public class display extends JFrame {
         //for op dropdowns
         String[] operators = {"=","<", "Any"};
 
-        String[] letters = {"Any Vowel","Any Consonant","Any Letter", "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
+        String[] letters = {"Any Letter","Any Consonant","Any Vowel", "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
 
 
         //filter dropdowns
 
+        int moveForward = (margins + halfOne);
+        int moveForward2 = (margins + halfTwo);
 
         //dropdown for operator on word length
         final JComboBox<String> lengthOperator = new JComboBox<>(operators);
-        lengthOperator.setBounds(74, 25,  50, 25);
+        lengthOperator.setBounds(moveForward, margins,  halfOne, queryHeight);
         panel.add(lengthOperator);
 
         //dropdown for operator on vowel space
         final JComboBox<String> vowelOperator = new JComboBox<>(operators);
-        vowelOperator.setBounds(125, 50,  50, 25);
+        vowelOperator.setBounds(moveForward, (margins + queryHeight),  halfOne, queryHeight);
         panel.add(vowelOperator);
 
         //dropdown for first letter
         final JComboBox<String> startingLetter = new JComboBox<>(letters);
-        startingLetter.setBounds(125, 75,  50, 25);
+        startingLetter.setBounds(moveForward, (margins + (queryHeight*2)),  halfTwo, queryHeight);
         panel.add(startingLetter);
 
+        //dropdown for uncommon letters boolean
+        final JCheckBox uncommonCheck = new JCheckBox("Uncommon Letters?");
+        uncommonCheck.setBounds(moveForward, (margins + (queryHeight*3)),  halfTwo, queryHeight);
+        panel.add(uncommonCheck);
 
-        //filter fields
+        //dropdown for adding "ing" boolean
+        final JCheckBox ingCheck = new JCheckBox("Append 'ING'?");
+        ingCheck.setBounds(moveForward, (margins + (queryHeight*4)),  halfTwo, queryHeight);
+        panel.add(ingCheck);
 
+        // NUMBERS sorry i removed the old comment here so im making my own
 
         //field for word length
         JTextField lengthField = new JTextField("0");
-        lengthField.setBounds(134, 25, 25, 25);
+        lengthField.setBounds(moveForward2, margins, halfOne, queryHeight);
         panel.add(lengthField);
 
         //field for vowel
         JTextField vowelField = new JTextField("0");
-        vowelField.setBounds(175, 50, 25, 25);
+        vowelField.setBounds(moveForward2, (margins + queryHeight), halfOne, queryHeight);
         panel.add(vowelField);
 
 
@@ -221,7 +157,14 @@ public class display extends JFrame {
 
         //button to run word calcs
         JButton run = new JButton("Generate");
-        run.setBounds(25, 175, 100, 25);
+        run.setFont(new Font("Arial", Font.PLAIN, 20));
+        run.setBackground(new Color(255,255,255));
+        //run.setForeground(new Color(0,0,0));
+        run.setBorder(BorderFactory.createDashedBorder(Color.black, 2, 3));
+
+        int newWidth = (frameWid / 2) - (margins * 3);
+
+        run.setBounds(margins, frameHeight - 145, newWidth, 100);
         panel.add(run);
 
 
@@ -230,13 +173,13 @@ public class display extends JFrame {
         //calculates words (run button)
         run.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JLabel result = new JLabel(gen.generate(Integer.parseInt((String)lengthField.getText()), Integer.parseInt((String)vowelField.getText()), (String)startingLetter.getSelectedItem(), (String)lengthOperator.getSelectedItem(), (String)vowelOperator.getSelectedItem()));
-                wordPanel.add(result);
+                JLabel result = new JLabel(gen.generate(Integer.parseInt((String)lengthField.getText()), Integer.parseInt((String)vowelField.getText()), (String)startingLetter.getSelectedItem(), (String)lengthOperator.getSelectedItem(), (String)vowelOperator.getSelectedItem(), (Boolean)uncommonCheck.isSelected(), (Boolean)ingCheck.isSelected()));
+                // santa why is your accursed result 331 characters long
+                wordPanel.add(result);   
                 wordPanel.repaint();
-                wordPanel.revalidate();
+                wordPanel.revalidate();  
             }
         });
-
 
     }
 }
