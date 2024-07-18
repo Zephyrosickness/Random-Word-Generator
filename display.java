@@ -175,6 +175,7 @@ public class display extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JLabel result = new JLabel(gen.generate(Integer.parseInt((String)lengthField.getText()), Integer.parseInt((String)vowelField.getText()), (String)startingLetter.getSelectedItem(), (String)lengthOperator.getSelectedItem(), (String)vowelOperator.getSelectedItem(), (Boolean)uncommonCheck.isSelected(), (Boolean)ingCheck.isSelected()));
                 // santa why is your accursed result 331 characters long
+                //he just really likes adding on letters
                 wordPanel.add(result);   
                 wordPanel.repaint();
                 wordPanel.revalidate();  

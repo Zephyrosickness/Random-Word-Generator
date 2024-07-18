@@ -45,9 +45,6 @@ public class gen {
             default:
                 System.out.println("something fucked up with the vowelop lil bro. vowelop: "+vowelOp);
         }
-        if(vowelDistance == 0){
-            vowelDistance = 1;
-        }
 
         switch(lengthOp){
             case "Any":
@@ -64,6 +61,8 @@ public class gen {
         }
         if(length<=1){
             length=3;
+        }else if(length>20){
+            length = 20;
         }
 
         //System.out.println(length);
@@ -88,6 +87,7 @@ public class gen {
         }
         if(addIng){
             if (finalWord.endsWith("e")) {
+                //fern you are a genius because idk what this is doing
                 StringBuffer stringBuffer = new StringBuffer(finalWord);
                 if (stringBuffer.length() > 0) {
                     stringBuffer.deleteCharAt(stringBuffer.length() - 1);
@@ -102,6 +102,7 @@ public class gen {
 
     public static String randomize(String[] array){
 
+        //gens random number. returns variable in array with same index
         Random rand = new Random();
         int resultIndex = rand.nextInt(array.length);
         if(resultIndex==0){
