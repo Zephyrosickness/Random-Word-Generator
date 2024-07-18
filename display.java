@@ -49,97 +49,97 @@ public class display extends JFrame {
         frame.add(panel);
         panel.setBounds(0, 0, 200, 400);
         frame.setResizable(false);
-        songInfoComponents(panel, wordPanel);
         frame.setVisible(true);
-    }
 
-    //panel to hold components
-    public static void songInfoComponents(JPanel panel, JPanel wordPanel) {
-
-        // set the layout manager to null for absolute positioning
-        panel.setLayout(null);
+                // set the layout manager to null for absolute positioning
+                panel.setLayout(null);
 
 
-        //filter option labels
-
-
-        //label for word length
-        JLabel lengthLabel = new JLabel("Word Length");
-        lengthLabel.setBounds(25, 25, 150, 25);
-        panel.add(lengthLabel);
-
-        //label for consonant
-        JLabel vowelLabel = new JLabel("Vowel Distance");
-        vowelLabel.setBounds(25, 50, 150, 25);
-        panel.add(vowelLabel);
-
-
-
-        //DROPDOWNS
-
-
-
-        //array vars (dropdown options)
-
-
-        //for op dropdowns
-        String[] operators = {"=","<", "Any"};
-
-        String[] letters = {"Any Vowel","Any Consonant","Any Letter", "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
-
-
-        //filter dropdowns
-
-
-        //dropdown for operator on word length
-        final JComboBox<String> lengthOperator = new JComboBox<>(operators);
-        lengthOperator.setBounds(74, 25,  50, 25);
-        panel.add(lengthOperator);
-
-        //dropdown for operator on vowel space
-        final JComboBox<String> vowelOperator = new JComboBox<>(operators);
-        vowelOperator.setBounds(125, 50,  50, 25);
-        panel.add(vowelOperator);
-
-        //dropdown for first letter
-        final JComboBox<String> startingLetter = new JComboBox<>(letters);
-        startingLetter.setBounds(125, 75,  50, 25);
-        panel.add(startingLetter);
-
-
-        //filter fields
-
-
-        //field for word length
-        JTextField lengthField = new JTextField("0");
-        lengthField.setBounds(134, 25, 25, 25);
-        panel.add(lengthField);
-
-        //field for vowel
-        JTextField vowelField = new JTextField("0");
-        vowelField.setBounds(175, 50, 25, 25);
-        panel.add(vowelField);
-
-
-        ///BUTTONS
-
-
-        //button to run word calcs
-        JButton run = new JButton("Generate");
-        run.setBounds(25, 175, 100, 25);
-        panel.add(run);
-
-
-        //ACTIONS
-
-        //calculates words (run button)
-        run.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JLabel result = new JLabel(gen.generate(Integer.parseInt((String)lengthField.getText()), Integer.parseInt((String)vowelField.getText()), (String)startingLetter.getSelectedItem()));
-                wordPanel.add(result);       
-            }
-        });
-
-
+                //filter option labels
+        
+        
+                //label for word length
+                JLabel lengthLabel = new JLabel("Word Length");
+                lengthLabel.setBounds(25, 25, 150, 25);
+                panel.add(lengthLabel);
+        
+                //label for consonant
+                JLabel vowelLabel = new JLabel("Vowel Distance");
+                vowelLabel.setBounds(25, 50, 150, 25);
+                panel.add(vowelLabel);
+        
+                //label for consonant
+                JLabel startLabel = new JLabel("First Letter");
+                startLabel.setBounds(25, 75, 150, 25);
+                panel.add(startLabel);
+        
+        
+        
+                //DROPDOWNS
+        
+        
+        
+                //array vars (dropdown options)
+        
+        
+                //for op dropdowns
+                String[] operators = {"=","<", "Any"};
+        
+                String[] letters = {"Any Vowel","Any Consonant","Any Letter", "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
+        
+        
+                //filter dropdowns
+        
+        
+                //dropdown for operator on word length
+                final JComboBox<String> lengthOperator = new JComboBox<>(operators);
+                lengthOperator.setBounds(74, 25,  50, 25);
+                panel.add(lengthOperator);
+        
+                //dropdown for operator on vowel space
+                final JComboBox<String> vowelOperator = new JComboBox<>(operators);
+                vowelOperator.setBounds(125, 50,  50, 25);
+                panel.add(vowelOperator);
+        
+                //dropdown for first letter
+                final JComboBox<String> startingLetter = new JComboBox<>(letters);
+                startingLetter.setBounds(125, 75,  50, 25);
+                panel.add(startingLetter);
+        
+        
+                //filter fields
+        
+        
+                //field for word length
+                JTextField lengthField = new JTextField("0");
+                lengthField.setBounds(134, 25, 25, 25);
+                panel.add(lengthField);
+        
+                //field for vowel
+                JTextField vowelField = new JTextField("0");
+                vowelField.setBounds(175, 50, 25, 25);
+                panel.add(vowelField);
+        
+        
+                ///BUTTONS
+        
+        
+                //button to run word calcs
+                JButton run = new JButton("Generate");
+                run.setBounds(25, 175, 100, 25);
+                panel.add(run);
+        
+        
+                //ACTIONS
+        
+                //calculates words (run button)
+                run.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        JLabel result = new JLabel(gen.generate(Integer.parseInt((String)lengthField.getText()), Integer.parseInt((String)vowelField.getText()), (String)startingLetter.getSelectedItem(), (String)lengthOperator.getSelectedItem(), (String)vowelOperator.getSelectedItem()));
+                        wordPanel.add(result);
+                        wordPanel.repaint();
+                        wordPanel.revalidate();
+                    }
+                });
     }
 }
