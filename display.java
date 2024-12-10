@@ -1,8 +1,6 @@
 import javax.swing.*;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 
@@ -44,8 +42,8 @@ public class display extends JFrame {
 
         // Create a JScrollPane and add the content panel to it
         JScrollPane wordDisplay = new JScrollPane(wordPanel);
-        Integer displayWid = (frameWid / 2) - (margins * 2);
-        Integer displayHeight = frameHeight - (margins * 2);
+        int displayWid = (frameWid / 2) - (margins * 2);
+        int displayHeight = frameHeight - (margins * 2);
         wordDisplay.setBounds((frameWid / 2) - margins, margins, displayWid, displayHeight);
 
         // Add the scroll pane to the frame
@@ -72,7 +70,7 @@ public class display extends JFrame {
         //filter option labels
 
         int queryHeight = 25;
-        int halfOne = Math.round((((frameWid / 2) - (margins * 2)) / 3 ));
+        int halfOne = ((((frameWid / 2)-(margins * 2))/3));
         int halfTwo = (halfOne * 2);
         // santa please i have enough variables i do not want them for my birthday also oh geez
 
@@ -152,7 +150,7 @@ public class display extends JFrame {
         panel.add(vowelField);
 
 
-        ///BUTTONS
+        //BUTTONS
 
 
         //button to run word calcs
@@ -171,15 +169,15 @@ public class display extends JFrame {
         //ACTIONS
 
         //calculates words (run button)
-        run.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JLabel result = new JLabel(gen.generate(Integer.parseInt((String)lengthField.getText()), Integer.parseInt((String)vowelField.getText()), (String)startingLetter.getSelectedItem(), (String)lengthOperator.getSelectedItem(), (String)vowelOperator.getSelectedItem(), (Boolean)uncommonCheck.isSelected(), (Boolean)ingCheck.isSelected()));
+        //if this gives some kind of error about "experimental java features" change the underscore to "e" (no quotation marks)
+        run.addActionListener(_ -> {
+                JLabel result = new JLabel(gen.generate(Integer.parseInt(lengthField.getText()), Integer.parseInt(vowelField.getText()), (String)startingLetter.getSelectedItem(), (String)lengthOperator.getSelectedItem(), (String)vowelOperator.getSelectedItem(), uncommonCheck.isSelected(), ingCheck.isSelected()));
                 // santa why is your accursed result 331 characters long
                 //he just really likes adding on letters
-                wordPanel.add(result);   
+            System.out.println(result.getText());
+                wordPanel.add(result);
                 wordPanel.repaint();
-                wordPanel.revalidate();  
-            }
+                wordPanel.revalidate();
         });
 
     }
