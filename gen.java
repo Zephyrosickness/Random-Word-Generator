@@ -1,3 +1,4 @@
+import java.util.Objects;
 import java.util.Random;
 
 public class gen {
@@ -13,13 +14,13 @@ public class gen {
         int vowelDistance = 1;
         
 
-        if(startLetter=="Any Letter"){
+        if(Objects.equals(startLetter, "Any Letter")){
             if(uncommonLet){
                 finalWord = randomize(all);
                 }else{
                 finalWord = randomize(reducedAll);
                 }
-        }else if(startLetter == "Any Consonant"){
+        }else if(Objects.equals(startLetter, "Any Consonant")){
             if(uncommonLet){
             finalWord = randomize(allConsonants);
             }else{
